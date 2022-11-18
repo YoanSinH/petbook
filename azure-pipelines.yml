@@ -16,3 +16,17 @@ steps:
     npm run test-ci
     npm run build
   displayName: 'npm install, test and build'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonacloud'
+    organization: 'yoansinh'
+    scannerMode: 'CLI'
+    configMode: 'file'
+    
+- task: SonarCloudAnalyze@1
+  displayName: 'Run sonarcloud'
+  
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
